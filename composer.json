@@ -1,0 +1,19 @@
+{
+    "name": "mikesaintsg/morphmapper",
+    "description": "Dynamically Maps Models in a custom notation for tables with Morph relationships.",
+    "license": "MIT",
+    "authors": [{"name": "mikesaintsg"}],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.3|^8.0",
+        "laravel/framework": "^8.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mikesaintsg\\MorphMapper\\MorphMapperServiceProvider"
+            ]
+        }
+    }
+}
