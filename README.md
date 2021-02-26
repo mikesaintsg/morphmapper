@@ -81,7 +81,7 @@ snake_case_delimiter
 
 Case Sensitivity is set to `false` since it is a preference and not a necessity. There are times when it is preferred with StudlyCase or camelCase files, but if you prefer folders to also be in studly or camel case, then case sensitivity can cause some confusion. It is best left up to you to decide what works best for you and your project.  
 
->####Best Case Scenario
+>#### Best Case Scenario
 > You have a model with a file in studly case: `App\Models\Folder\ExampleModel`.
 > 
 > The morphMap key results for this Model based on case sensitivity would be:
@@ -96,7 +96,7 @@ Case Sensitivity is set to `false` since it is a preference and not a necessity.
 >   'folder.examplemodel' 
 > ```
 
->####Worst Case Scenario
+>#### Worst Case Scenario
 > You have a model with a file AND folder in studly case: `App\Models\FooBar\FooBarBaz`.
 >
 > The morphMap key results for this Model based on case sensitivity would be:
