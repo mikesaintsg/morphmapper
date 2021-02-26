@@ -3,43 +3,21 @@
 namespace Mikesaintsg\MorphMapper;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
-use Illuminate\Support\Str;
+use Illuminate\Support\ServiceProvider as ServiceProvider;
 
-class MorphMapperServiceProvider extends LaravelServiceProvider
+class MorphMapperServiceProvider extends ServiceProvider
 {
+    protected $configFilePath = __DIR__ . '/../config/morphmapper.php';
+
     public function boot()
     {
-        Relation::morphMap($this->mapModels());
+        $this->publishes([$this->configFilePath => config_path('morphmapper.php')], 'morphmapper-config');
+
+        Relation::morphMap(dd((new MorphMapper())->morphMap));
     }
 
-    protected function mapModels()
+    public function register()
     {
-        return $this->getModels()->mapWithKeys(function ($file) {
-            return [$this->modelKey($file) => $this->modelValue($file)];
-        })->toArray();
-    }
-
-    protected function getModels()
-    {
-        return $this->modelsPathFiles()->map(function ($file) {
-            return str_replace(".php", '', $file->getrelativepathname());
-        });
-    }
-
-    private function modelsPathFiles()
-    {
-        return collect((new Filesystem())->allFiles(app_path('Models')));
-    }
-
-    protected function modelKey($file)
-    {
-        return str_replace("-", ".",stripslashes(Str::kebab($file)));
-    }
-
-    protected function modelValue($file)
-    {
-        return 'App\Models\\' . $file;
+        $this->mergeConfigFrom(__DIR__ . '/../config/morphmapper.php', 'morphmapper');
     }
 }
