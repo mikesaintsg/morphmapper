@@ -3,7 +3,12 @@
     "description": "Dynamically Maps Models in a custom notation for tables with Morph relationships.",
     "license": "MIT",
     "authors": [{"name": "mikesaintsg"}],
-    "minimum-stability": "dev",
+    "minimum-stability": "dev",    
+    "autoload": {
+        "psr-4": {
+            "Mikesaintsg\\MorphMapper\\": "src"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [
