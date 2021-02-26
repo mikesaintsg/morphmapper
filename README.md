@@ -77,10 +77,20 @@ kebab-case-delimiter
 snake_case_delimiter
 ```
 
+#### <a id="configuration-overrides">Morph Map Override (overrides)</a>
+
+There is always the chance that you may wish to override the keys that are automatically generated. Feel free to implement custom keys when you see fit for certain models. Make sure to include the fully qualified class name as the value in order to replace the key for the Model.
+
+```php
+    'overrides' => [
+        'custom-key' => 'App\Models\Example'
+    ];
+```
+
 #### <a id="configuration-case">Case Sensitivity (case-sensitive)</a>
 
 Case Sensitivity is set to `false` since it is a preference and not a necessity. There are times when it is preferred with StudlyCase or camelCase files, but if you prefer folders to also be in studly or camel case, then case sensitivity can cause some confusion. It is best left up to you to decide what works best for you and your project.  
-
+###
 >#### Best Case Scenario
 > You have a model with a file in studly case: `App\Models\Folder\ExampleModel`.
 > 
@@ -95,7 +105,7 @@ Case Sensitivity is set to `false` since it is a preference and not a necessity.
 > 
 >   'folder.examplemodel' 
 > ```
-
+###
 >#### Worst Case Scenario
 > You have a model with a file AND folder in studly case: `App\Models\FooBar\FooBarBaz`.
 >
@@ -110,18 +120,7 @@ Case Sensitivity is set to `false` since it is a preference and not a necessity.
 > 
 >   'foobar.foobarbaz' 
 > ```
-
-
-#### <a id="configuration-overrides">Morph Map Override (overrides)</a>
-
-There is always the chance that you may wish to override the keys that are automatically generated. Feel free to implement custom keys when you see fit for certain models. Make sure to include the fully qualified class name as the value in order to replace the key for the Model.
-
-```php
-    'overrides' => [
-        'custom-key' => 'App\Models\Example'
-    ];
-```
-
+###
 <a href="#top">Back to Top</a>
 
 ## <a id="license">License</a>
