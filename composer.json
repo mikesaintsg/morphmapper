@@ -1,8 +1,16 @@
 {
     "name": "mikesaintsg/morphmapper",
-    "description": "Dynamically Maps Models in a custom notation for tables with Morph relationships.",
+    "version": "1.0.0",
+    "description": "Dynamically maps the morphMap key of a Model in a custom notation for tables with Morph relationships.",
+     "homepage": "https://github.com/mikesaintsg/morphmapper",
+    "keywords": ["laravel","morph"],
     "license": "MIT",
-    "authors": [{"name": "mikesaintsg"}],
+    "authors": [
+        {
+            "name": "mikesaintsg",
+            "role": "Developer"
+        }
+    ],
     "minimum-stability": "dev",    
     "autoload": {
         "psr-4": {
