@@ -1,8 +1,6 @@
 <a id="top"></a>
 # MorphMapper
 
-[![Total Downloads](https://img.shields.io/packagist/dt/mikesaintsg/morphmapper.svg?style=flat-square)](https://packagist.org/packages/mikesaintsg/morphmapper)
-
 This package will recursively discover all the Model files in the `App\Models` folder, then dynamically generate and register morphMap keys for those Model files.
 
 
