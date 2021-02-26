@@ -11,36 +11,41 @@ class MorphMapper
 
     public function __construct()
     {
-        $this->morphMap = $this->mergeMapModels();
+        $this->morphMap = $this->mergedDiscoveredModelsWithConfigModels();
     }
 
-    protected function mergeMapModels()
+    protected function discoveredModelFilesFromFolder()
     {
-        return $this->discoverMapModels()->flip()->merge(collect(config('morphmapper.models.maps'))->flip())->unique()->flip()->toArray();
+        return collect((new Filesystem())->allFiles(base_path("App\Models")));
     }
 
-    protected function discoverMapModels()
+    protected function discoveredModelFilesWithExtensionRemoved()
     {
-        return $this->getModels()->mapWithKeys(function ($file) {return [$this->modelKey($file) => $this->modelValue($file)];});
+        return $this->discoveredModelFilesFromFolder()->map(function ($file) {return str_replace(".php", '', $file->getrelativepathname());});
     }
 
-    protected function getModels()
+    protected function discoveredModelsMapped()
     {
-        return $this->modelsPathFiles()->map(function ($file) {return str_replace(".php", '', $file->getrelativepathname());});
+        return $this->discoveredModelFilesWithExtensionRemoved()->mapWithKeys(function ($file) {return [$this->generatedModelKey($file) => $this->generatedModelValue($file)];});
     }
 
-    private function modelsPathFiles()
+    protected function generatedModelValue($file)
     {
-        return collect((new Filesystem())->allFiles(base_path(config('morphmapper.models.folder'))));
+        return "App\Models" . "\\" . $file;
     }
 
-    protected function modelKey($file)
+    protected function generatedModelKey($file)
     {
-        return str_replace("-", config('morphmapper.delimiter'), stripslashes(Str::kebab($file)));
+        return str_replace("-", config('morphmapper.delimiter'), $this->filePathBasedOnCaseSensitivity($file));
     }
 
-    protected function modelValue($file)
+    protected function filePathBasedOnCaseSensitivity($file)
     {
-        return config('morphmapper.models.folder') . "\\" . $file;
+        return config('morphmapper.case-sensitive') ? stripslashes(Str::kebab($file)) : str_replace("\\", "-", strtolower($file));
+    }
+
+    protected function mergedDiscoveredModelsWithConfigModels()
+    {
+        return $this->discoveredModelsMapped()->flip()->merge(collect(config('morphmapper.overrides'))->flip())->unique()->flip()->toArray();
     }
 }

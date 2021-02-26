@@ -4,11 +4,9 @@ return [
 
     'delimiter' => '.',
 
-    'models' => [
+    'case-sensitive' => false,
 
-        'folder' => 'App\Models',
-
-        'maps' => []
+    'overrides' => [
+        //
     ]
-
 ];
